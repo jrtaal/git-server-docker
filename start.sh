@@ -4,7 +4,7 @@
 # then it copies its contain in authorized_keys file
 if [ "$(ls -A /git-server/keys/)" ]; then
   cd /home/git
-  cat /git-server/keys/*.pub > .ssh/authorized_keys
+  paste -d '\n' /git-server/keys/*.pub > .ssh/authorized_keys
   chown -R git:git .ssh
   chmod 700 .ssh
   chmod -R 600 .ssh/*

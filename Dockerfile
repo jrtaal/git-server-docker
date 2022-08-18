@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.16
 
 MAINTAINER Carlos Bernárdez "carlos@z4studios.com"
 

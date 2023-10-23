@@ -1,15 +1,13 @@
-version: '2'
-
 services:
 
   git-server:
-    image: jkarlos/git-server-docker
-    #build: .
+    build: .
     restart: always
     container_name: git-server
     ports:
       - "2222:22"
     volumes:
-    - ~/git-server/keys:/git-server/keys
-    - ~/git-server/repos:/git-server/repos
+    - ./ro-keys:/git-server/ro-keys
+    - ./rw-keys:/git-server/rw-keys
+    - ./repos:/git-server/repos
 

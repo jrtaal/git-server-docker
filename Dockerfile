@@ -36,6 +36,8 @@ RUN mkdir /git-server/rw-keys \
 # More info: https://git-scm.com/docs/git-shell
 COPY git-shell-commands /home/gitrw/git-shell-commands
 
+RUN git config --global init.defaultBranch main
+
 # sshd_config file is edited for enable access key and disable access password
 COPY sshd_config /etc/ssh/sshd_config
 COPY start.sh start.sh

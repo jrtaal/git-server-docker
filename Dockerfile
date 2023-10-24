@@ -26,7 +26,12 @@ RUN mkdir /git-server/rw-keys \
   && echo git:`pwgen 10 1` | chpasswd \
   && echo gitrw:`pwgen 10 1` | chpasswd \
   && mkdir /home/git/.ssh \
-  && mkdir /home/gitrw/.ssh
+  && mkdir /home/gitrw/.ssh \
+  && mkdir /home/gitrw/repo \
+  && chown -R gitrw:gitrw /home/gitrw/repo \
+  && git config --global init.defaultBranch main \
+  && ln -s /home/gitrw/repo /home/git/repo
+
 
 # This is a login shell for SSH accounts to provide restricted Git access.
 # It permits execution only of server-side Git commands implementing the
@@ -35,8 +40,6 @@ RUN mkdir /git-server/rw-keys \
 
 # More info: https://git-scm.com/docs/git-shell
 COPY git-shell-commands /home/gitrw/git-shell-commands
-
-RUN git config --global init.defaultBranch main
 
 # sshd_config file is edited for enable access key and disable access password
 COPY sshd_config /etc/ssh/sshd_config

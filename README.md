@@ -14,9 +14,9 @@ This GIT server allows to sets of keys, readonly keys and readwrite keys.
 How to run the container in port 2222 with three volumes: two keys volumes for public keys and a repos volume for git repositories:
 
 	$ docker run -d -p 2222:22 \
-	    -v ~/git-server/ro-keys:/git-server/ro-keys \
-	    -v ~/git-server/rw-keys:/git-server/rw-keys \
-		-v ~/git-server/repos:/git-server/repos jrtaal/git-server-docker
+	    -v ./ro-keys:/git-server/ro-keys \
+	    -v ./rw-keys:/git-server/rw-keys \
+		-v ./repos:/home/git/repo jrtaal/git-server-docker
 
 ### How to use an existing public key:
 

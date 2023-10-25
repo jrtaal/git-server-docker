@@ -22,6 +22,14 @@ How to run the container in port 2222 with three volumes: two keys volumes for p
 	    -v ./rw-keys:/git-server/rw-keys \
 		-v ./repo:/home/git/repo jrtaal/git-server-docker
 
+### Docker Image Arguments
+
+* **Expose ports**: 22
+* **Volumes**:
+  * `/git-server/ro-keys`: Volume to store the readonly public keys
+  * `/git-server/rw-keys`: Volume to store the readwrite public keys
+  * `/home/git/repo`: Volume to store the repositories
+
 ### How to use an existing public key:
 
 Copy them to ro-keys folder: 
@@ -76,14 +84,9 @@ First add a new git remote using the readwrite key
     $ git remote add rw ssh://gitrw@<ip-docker-server>:2222/home/git/repo/myrepo.git
 	$ git push rw <branch>
 
+### Creating a new repo
 
-### Arguments
-
-* **Expose ports**: 22
-* **Volumes**:
-  * `/git-server/ro-keys`: Volume to store the readonly public keys
-  * `/git-server/rw-keys`: Volume to store the readwrite public keys
-  * `/home/git/repo`: Volume to store the repositories
+    ssh -i <readwrite_private_key> gitrw@<ip-docker-server> -p 2222 init <repository name>
 
 ### SSH Keys
 
@@ -101,7 +104,7 @@ How to make the image:
 
 ### Docker-Compose
 
-You can edit docker-compose.yml and run this container with docker-compose:
+You can edit docker-compose.yml and run this container with docker-compose. The default file will run the git server on port 2222:
 
 	$ docker-compose up -d
 

@@ -11,14 +11,18 @@ RUN apk add --no-cache \
   git
 
 
+# Key generation on the server
+RUN ssh-keygen -A
+
+
 # SSH autorun
 # RUN rc-update add sshd
 
-WORKDIR /git-server/
+WORKDIR /home/git/
 
 # -D flag avoids password generation
 # -s flag changes user's shell
-RUN mkdir /git-server/rw-keys \
+RUN mkdir -p /git-server/rw-keys \
   && mkdir /git-server/ro-keys  \
   && adduser -D -s /usr/bin/git-shell-ro git \
   && adduser -D -s /usr/bin/git-shell gitrw \
@@ -48,4 +52,4 @@ COPY git-shell-ro /usr/bin/
 
 EXPOSE 22
 
-CMD ["sh", "start.sh"]
+ENTRYPOINT [ "sh", "start.sh" ]

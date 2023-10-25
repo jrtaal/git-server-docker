@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Key generation on the server
-ssh-keygen -A
-
 # If there is some public key in keys folder
 # then it copies its contain in authorized_keys file
 if [ "$(ls -A /git-server/rw-keys/)" ]; then
@@ -28,7 +25,7 @@ fi
 # More info: https://github.com/jkarlosb/git-server-docker/issues/1
 if [ "$(ls -A /home/git/repo/)" ]; then
   cd /home/git/repo
-  chown -R gitrw:git .
+  chown -R gitrw:gitrw .
   chmod -R u+rwX,g+rX .
   find . -type d -exec chmod g+s '{}' +
 fi

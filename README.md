@@ -3,6 +3,10 @@ A lightweight Git Server Docker image built with Alpine Linux.
 
 !["image git server docker" "git server docker"](https://raw.githubusercontent.com/cedricfarinazzo/git-server-docker/master/git-server-docker.jpg)
 
+This image supports both read-write and read-only access. The `git` user has readonly access and the `gitrw` has readwrite access to the same repos.
+
+The repos should be stored under /home/git/repo.
+
 ## Basic Usage
 
 This GIT server allows to sets of keys, readonly keys and readwrite keys.
@@ -53,15 +57,15 @@ How to upload a repo:
 
 From host:
 
-	$ mv myrepo.git ~/git-server/repos
+	$ mv myrepo.git ~/home/git/repos
 
 From remote:
 
-	$ scp -r myrepo.git user@host:~/git-server/repos
+	$ scp -r myrepo.git user@host:~/home/git/repo
 
 How clone a repository:
 
-	$ git clone ssh://git@<ip-docker-server>:2222/git-server/repos/myrepo.git
+	$ git clone ssh://git@<ip-docker-server>:2222/home/git/repo/myrepo.git
 
 ### Pushing
 
@@ -69,7 +73,7 @@ Pushing can only be done using a readwrite key:
 
 First add a new git remote using the readwrite key
 
-    $ git remote add rw ssh://gitrw@<ip-docker-server>:2222/git-server/repos/myrepo.git
+    $ git remote add rw ssh://gitrw@<ip-docker-server>:2222/home/git/repo/myrepo.git
 	$ git push rw <branch>
 
 
@@ -79,7 +83,7 @@ First add a new git remote using the readwrite key
 * **Volumes**:
   * `/git-server/ro-keys`: Volume to store the readonly public keys
   * `/git-server/rw-keys`: Volume to store the readwrite public keys
-  * `/git-server/repos`: Volume to store the repositories
+  * `/home/git/repo`: Volume to store the repositories
 
 ### SSH Keys
 

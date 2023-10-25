@@ -9,5 +9,5 @@ services:
     volumes:
     - ./ro-keys:/git-server/ro-keys
     - ./rw-keys:/git-server/rw-keys
-    - ./repos:/home/git/repos
+    - ./repo:/home/git/repo
 

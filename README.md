@@ -20,7 +20,7 @@ How to run the container in port 2222 with three volumes: two keys volumes for p
 	$ docker run -d -p 2222:22 \
 	    -v ./ro-keys:/git-server/ro-keys \
 	    -v ./rw-keys:/git-server/rw-keys \
-		-v ./repos:/home/git/repo jrtaal/git-server-docker
+		-v ./repo:/home/git/repo jrtaal/git-server-docker
 
 ### How to use an existing public key:
 
@@ -57,7 +57,7 @@ How to upload a repo:
 
 From host:
 
-	$ mv myrepo.git ~/home/git/repos
+	$ mv myrepo.git ~/home/git/repo
 
 From remote:
 
